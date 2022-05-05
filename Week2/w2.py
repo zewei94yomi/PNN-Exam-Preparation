@@ -1,5 +1,5 @@
 import numpy as np
-from utils import add_list, sub_list, my_argmax_plus1
+from commons.utils import add_list, sub_list, my_argmax_plus1
 from sklearn.neighbors import KNeighborsClassifier
 
 

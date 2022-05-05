@@ -1,5 +1,5 @@
 import numpy as np
-from utils import has_change, add_list, Heaviside
+from commons.utils import has_change, add_list, Heaviside
 
 
 def neuron_Heaviside(w=[0.1, -0.5, 0.4],
