@@ -13,7 +13,8 @@ directory, there is a tutorial question sheet and an answer script. The answer s
 only contains solutions to calculation questions that are likely to appear in the 
 exam. 
 
-
+## How to run
+Each `.py` file has a `main` method. Just simply run it. 
 
 ## Week1: Introduction to Pattern Recognition
 
