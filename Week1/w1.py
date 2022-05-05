@@ -13,7 +13,7 @@ def confusion_matrix(TP, TN, FP, FN):
     print(f"Precision: {precision}")
     print(f"F1-Score: {f1}")
 
-    
+
 if __name__ == '__main__':
     # Tutorial 1.8
     confusion_matrix(TP=3, TN=1, FP=1, FN=2)

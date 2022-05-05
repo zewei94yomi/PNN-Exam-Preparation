@@ -32,5 +32,4 @@ def Heaviside(ans):
 
 
 if __name__ == '__main__':
-    t_gx = [0, 0, 0]
-    print(my_argmax(t_gx))
+    print("Test function here...")
