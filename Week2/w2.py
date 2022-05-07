@@ -81,13 +81,16 @@ def perceptron_augmented_notion(at=[1, 0, 0],
             if gx <= 0:
                 has_mismatch = True
                 if learn_type == "Batch":
-                    add_list(total_change, lr * y)
+                    # add_list(total_change, lr * y)
+                    total_change = np.add(total_change, lr * y)
                 else:
-                    add_list(at, lr * y)
+                    # add_list(at, lr * y)
+                    at = np.add(at, lr * y)
             if learn_type == "Sequential":
                 print(f"Iteration {iteration}, \t y^t = {y}, \t g(x) = {gx}, \t at = {at}")
         if learn_type == "Batch":
-            add_list(at, total_change)
+            # add_list(at, total_change)
+            at = np.add(at, total_change)
             print(f"Epoch {epoch}, \t sum of delta = {total_change}, \t at = {at}")
     print(f"Converged: at = {at}")
     return at
@@ -121,8 +124,10 @@ def multiclass_sequential_perceptron_augmented_notion(
             g_max = my_argmax_plus1(g)
             if g_max != w[i]:
                 need_update = True
-                add_list(At[w[i] - 1], lr * Yt[i])
-                sub_list(At[g_max - 1], lr * Yt[i])
+                # add_list(At[w[i] - 1], lr * Yt[i])
+                # sub_list(At[g_max - 1], lr * Yt[i])
+                At[w[i] - 1] = np.add(At[w[i] - 1], lr * Yt[i])
+                At[g_max - 1] = np.add(At[g_max - 1], lr * Yt[i])
             print(f"Iteration {iteration}, \t g = {g}, \t w = {w[i]}, \t At = {At}")
     print(f"Converged: At = {At}")
     return At
@@ -146,7 +151,8 @@ def sequential_widrow_hoff_iter(at=[1, 0, 0],
         aty = np.dot(at, Yt[i])
         if bt[i] != aty:
             delta = np.multiply(lr * (bt[i] - aty), Yt[i])
-            add_list(at, delta)
+            # add_list(at, delta)
+            at = np.add(at, delta)
         iteration += 1
         print(
             f"Iteration {iteration}, \t yt = {Yt[i]}, \t at * y = {np.round_(aty, decimals=4)}, "
@@ -170,7 +176,8 @@ def sequential_widrow_hoff_epoch(at=[1, 0, 0],
             aty = np.dot(at, Yt[i])
             if bt[i] != aty:
                 delta = np.multiply(lr * (bt[i] - aty), Yt[i])
-                add_list(at, delta)
+                # add_list(at, delta)
+                at = np.add(at, delta)
         epoch += 1
         print(f"Epoch {epoch}, \t at = {np.round_(at, decimals=4)}")
     print(f"After {epochs} epochs: at = {np.round_(at, decimals=4)}")
@@ -204,14 +211,14 @@ if __name__ == '__main__':
     # two_d_quadratic_discrimination()
     
     # Perceptron Learning
-    # perceptron_augmented_notion()
+    perceptron_augmented_notion()
     
     # Multiclass sequential perceptron learning
     # multiclass_sequential_perceptron_augmented_notion()
     
     # Sequential Widrow-Hoff
     # sequential_widrow_hoff_iter()
-    sequential_widrow_hoff_epoch()
+    # sequential_widrow_hoff_epoch()
     
     # KNN
     # knn()

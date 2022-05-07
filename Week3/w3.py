@@ -58,16 +58,19 @@ def delta_learning(theta=1.5,
             if learn_type == "Sequential":
                 if ty != 0:
                     need_update = True
-                add_list(W, delta)
+                # add_list(W, delta)
+                W = np.add(W, delta)
                 print(f"Iteration {iteration}, \t x = {X[i]}, \t t = {t[i]}, \t y = H(wx) = {y}, \t t-y = {ty}, "
                       f"\t update = {delta}, \t W = {W}")
             else:
                 delta = np.multiply(lr * ty, X[i])
-                add_list(total_delta, delta)
+                # add_list(total_delta, delta)
+                total_delta = np.add(total_delta, delta)
         if learn_type == "Batch":
             if has_change(total_delta):
                 need_update = True
-                add_list(W, total_delta)
+                # add_list(W, total_delta)
+                W = np.add(W, total_delta)
             print(f"Epoch {epoch}, \t x = {X[i]}, \t t = {t[i]}, \t y = H(wx) = {y}, \t t-y = {ty}, "
                   f"\t update = {total_delta}, \t W = {W}")
     print(f"Converged: W = {W}, theta = {-W[0]}, w = {W[1:]}")
