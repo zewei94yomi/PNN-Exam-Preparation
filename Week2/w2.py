@@ -127,7 +127,7 @@ def multiclass_sequential_perceptron_augmented_notion(
                 # add_list(At[w[i] - 1], lr * Yt[i])
                 # sub_list(At[g_max - 1], lr * Yt[i])
                 At[w[i] - 1] = np.add(At[w[i] - 1], lr * Yt[i])
-                At[g_max - 1] = np.add(At[g_max - 1], lr * Yt[i])
+                At[g_max - 1] = np.subtract(At[g_max - 1], lr * Yt[i])
             print(f"Iteration {iteration}, \t g = {g}, \t w = {w[i]}, \t At = {At}")
     print(f"Converged: At = {At}")
     return At
@@ -211,10 +211,10 @@ if __name__ == '__main__':
     # two_d_quadratic_discrimination()
     
     # Perceptron Learning
-    perceptron_augmented_notion()
+    # perceptron_augmented_notion()
     
     # Multiclass sequential perceptron learning
-    # multiclass_sequential_perceptron_augmented_notion()
+    multiclass_sequential_perceptron_augmented_notion()
     
     # Sequential Widrow-Hoff
     # sequential_widrow_hoff_iter()
