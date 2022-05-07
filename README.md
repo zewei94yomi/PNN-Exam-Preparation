@@ -16,6 +16,8 @@ exam.
 ## How to run
 Each `.py` file has a `main` method. Just simply run it. 
 
+You shall change parameters in the method definition.
+
 ## Week1: Introduction to Pattern Recognition
 
 - Q8: Error rate, Accuracy, Recall, Precision, F1-Score
