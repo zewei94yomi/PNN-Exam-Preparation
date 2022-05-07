@@ -39,3 +39,7 @@ Each `.py` file has a `main` method. Just simply run it.
     - Linear weighted sum + Heaviside activation function
 - Q3, Q4, Q5, Q6: Delta Learning
     - Choose 'Sequential' or 'Batch' learning
+  
+## Week4: Multilayer Perceptrons and Backpropagation 
+
+- Q5: Sigmoid

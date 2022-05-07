@@ -7,7 +7,6 @@ def neuron_Heaviside(w=[0.1, -0.5, 0.4],
                      X=[0.1, -0.5, 0.4]):
     """
     Tutorial 3.2
-    
     Neuron has a transfer function:
         1. linear weighted sum of its inputs
         2. activation function: Heaviside function
