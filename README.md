@@ -45,3 +45,9 @@ You shall change parameters in the method definition.
 ## Week4: Multilayer Perceptrons and Backpropagation 
 
 - Q5: Sigmoid
+
+## Week5: Deep Discriminative Neural Network
+
+- Q4: ReLU, LReLU, tanh, heaviside
+- Q5: Batch Normalization
+- Q9: Calculate output dimensions
