@@ -214,10 +214,10 @@ if __name__ == '__main__':
     # perceptron_augmented_notion()
     
     # Multiclass sequential perceptron learning
-    multiclass_sequential_perceptron_augmented_notion()
+    #multiclass_sequential_perceptron_augmented_notion()
     
     # Sequential Widrow-Hoff
-    # sequential_widrow_hoff_iter()
+    sequential_widrow_hoff_iter()
     # sequential_widrow_hoff_epoch()
     
     # KNN
