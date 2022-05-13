@@ -1,6 +1,15 @@
 import numpy as np
 
 
+def covariance(zero_mean_X=[[-1., -1., 0], [0, 0, 0], [1., 2., 0], [0, -1., 0]]):
+    C = 0
+    for x in zero_mean_X:
+        x_temp = np.transpose(np.array([x]))
+        C += np.multiply(x_temp, x_temp.T)
+    C /= len(zero_mean_X)
+    return C
+
+
 def KLT(X=[[1, 2, 1], [2, 3, 1], [3, 5, 1], [2, 2, 1]],
         V = [[0.4719, 0.8817, 0], [-0.8817, 0.4719, 0]]):
     """
@@ -15,14 +24,16 @@ def KLT(X=[[1, 2, 1], [2, 3, 1], [3, 5, 1], [2, 2, 1]],
     zero_mean_X = X - mean
     print("Zero mean data:")
     print(zero_mean_X)
-    # cm = np.cov(zero_mean_X, bias=True)
-    # print("Covariance Matrix:")
-    # print(cm)
+    
+    C = covariance(zero_mean_X=zero_mean_X)
+    print("Covariance Matrix:")
+    print(C)
     # E, V = np.linalg.eig(cm)
     # print(E)
     # print(V)
     Y = []
     V = np.array(V)
+    print("Eigenvectors:")
     print(V)
     for i in range(len(zero_mean_X)):
         newY = np.dot(V, zero_mean_X[i].T)
@@ -32,7 +43,10 @@ def KLT(X=[[1, 2, 1], [2, 3, 1], [3, 5, 1], [2, 2, 1]],
     # print(np.array(Y))
     # cm = np.cov(np.array(Y).T, bias=True)
     # print(np.around(cm, 4))
-
+    C2 = covariance(Y)
+    print("Covariance matrix of new data:")
+    print(C2)
+    
 
 def Ojas_learning_rule(X=[[-5, -4], [-2, 0], [0, -1], [0, 1], [3, 2], [4, 2]],
                        lr=0.01,
@@ -152,20 +166,11 @@ def sparse_coding(x=[-0.05, -0.95],
         print(f"Vt*y_{cnt}:{tmp}, \t x-Vt*y_{cnt}:{res}, \t error of y_{cnt}: {normval}")
 
 
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
-
     # KLT to project n-dimensional data onto the first two principal components
     # KLT(X=[[5, 5, 4.4, 3.2], [6.2, 7.0, 6.3, 5.7], [5.5, 5.0, 5.2, 3.2], [3.1, 6.3, 4.0, 2.5], [6.2, 5.6, 2.3, 6.1]],
     #     V=[[0.58, 0.12, -0.04, 0.81],[0.11, 0.25, 0.96, -0.07]])
-    # KLT()
+    KLT()
 
     # Apply to Tutorial 7.6
     # KLT(X=[[0, 1], [3, 5], [5, 4], [5, 6], [8, 7], [9, 7]],
@@ -181,4 +186,4 @@ if __name__ == '__main__':
 
     # extreme_learning_machine()
 
-    sparse_coding()
+    # sparse_coding()
