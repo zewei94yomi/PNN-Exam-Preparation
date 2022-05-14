@@ -2,6 +2,7 @@ import math
 import numpy as np
 from itertools import chain
 from commons.utils import distance
+from sklearn.cluster import KMeans
 
 
 def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5], [1]]):
@@ -63,14 +64,17 @@ def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
             print(f", \t class {belong}")
         # Update centers
         for i in range(len(centers)):
-            ps = cls[i + 1]
             new_list = np.mean(cls[i + 1], axis=0).tolist()
             centers[i] = new_list
         print(f"New center: {centers}")
         
-            
-            
         
+def kmeans_sklearn(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
+                   n_clusters=2):
+    kmeans = KMeans(n_clusters=n_clusters).fit(S)
+    print("Centers: (converged)")
+    print(kmeans.cluster_centers_)
+
 
 def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
                  mu=[[1, 0.5, 0.5, 0.5, 0.5, 0], [0, 0.5, 0.5, 0.5, 0.5, 1]],
@@ -143,4 +147,5 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
 if __name__ == '__main__':
     # Kmeans()
     # Fuzzy_kmeans()
-    Kmeans_v2()
+    # Kmeans_v2()
+    kmeans_sklearn()
