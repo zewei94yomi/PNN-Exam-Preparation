@@ -84,8 +84,7 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
         print("iteration:" + str(iteration))
         print("normalise memberships:")
         print(mu)
-        print("")
-        
+
         first_element = 0
         second_element = 0
         dinominator = 0
@@ -94,7 +93,7 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
             second_element += mu[0][i] * mu[0][i] * S[1][i]
             dinominator += mu[0][i] * mu[0][i]
         m1 = [[first_element / dinominator], [second_element / dinominator]]
-        
+
         first_element = 0
         second_element = 0
         dinominator = 0
@@ -103,31 +102,32 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
             second_element += mu[1][i] * mu[1][i] * S[1][i]
             dinominator += mu[1][i] * mu[1][i]
         m2 = [[first_element / dinominator], [second_element / dinominator]]
-        
+
         print("m1 = " + str(m1))
         print("m2 = " + str(m2))
-        
+
         new_mu1 = []
         new_mu2 = []
-        print("SampleX   ||x-m1||   ||x-m2||  (1/||x-m1||)^2   (1/||x-m2||)^2        u1j                  u2j")
+        print(
+            "SampleX   ||x-m1||      ||x-m2||         (1/||x-m1||)^(2/(b-1))       (1/||x-m2||)^(2/(b-1))       u1j               u2j")
         for i in range(len(S[0])):
             dist1 = math.sqrt((m1[0][0] - S[0][i]) * (m1[0][0] - S[0][i]) + (m1[1][0] - S[1][i]) * (m1[1][0] - S[1][i]))
             dist2 = math.sqrt((m2[0][0] - S[0][i]) * (m2[0][0] - S[0][i]) + (m2[1][0] - S[1][i]) * (m2[1][0] - S[1][i]))
-            
+
             u1j = 1 / (dist1 * dist1) / (1 / (dist1 * dist1) + 1 / (dist2 * dist2))
             u2j = 1 / (dist2 * dist2) / (1 / (dist1 * dist1) + 1 / (dist2 * dist2))
-            
-            print("[" + str(S[0][i]) + " " + str(S[1][i]) + "]" + "   " + str(dist1) + "         " + str(
-                dist2) + "    " + str(round(1 / (dist1 * dist1), 4)) + "             " + str(
-                round(1 / (dist2 * dist2), 4)) + "           "
-                  + str(u1j) + "             " + str(u2j))
-            
+
+            print("[" + str(S[0][i]) + " " + str(S[1][i]) + "]" + "   " + str(round(dist1, 4)) + "          " + str(
+                round(dist2, 4)) + "                  " + str(
+                round(1 / pow(dist1, 2 / (b - 1)), 4)) + "                          " + str(
+                round(1 / pow(dist2, 2 / (b - 1)), 4)) + "           "
+                  + str(round(u1j, 4)) + "           " + str(round(u2j, 4)))
+
             new_mu1.append(u1j)
             new_mu2.append(u2j)
-        
+
         new_mu = [new_mu1, new_mu2]
-        print(new_mu)
-        
+        print()
         if iteration > 1:
             if (abs(m1[0][0] - m1_old[0][0]) < theta and abs(m1[1][0] - m1_old[1][0]) < theta and
                     abs(m2[0][0] - m2_old[0][0]) < theta and abs(m2[1][0] - m2_old[1][0]) < theta):
@@ -136,9 +136,9 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
                 print("final m2:")
                 print(m2)
                 break
-        
+
         mu = new_mu
-        
+
         m1_old = m1
         m2_old = m2
         iteration += 1
@@ -146,6 +146,6 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
 
 if __name__ == '__main__':
     # Kmeans()
-    # Fuzzy_kmeans()
+    Fuzzy_kmeans()
     # Kmeans_v2()
-    kmeans_sklearn()
+    #kmeans_sklearn()
