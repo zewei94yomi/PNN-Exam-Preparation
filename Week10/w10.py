@@ -3,7 +3,7 @@ import numpy as np
 from itertools import chain
 
 def Kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1 = [[-1], [3]], m2 = [[5], [1]]):
-    iteration = 0
+    iteration = 1
     while(1):
         print("iteration:"+str(iteration))
         print("SampleX   ||x-m1||   ||x-m2||    Class")
@@ -12,8 +12,6 @@ def Kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1 = [[-1], [3]], m2 
         for i in range(len(S[0])):
             dist1 = math.sqrt((m1[0][0] - S[0][i]) * (m1[0][0] - S[0][i]) + (m1[1][0] - S[1][i]) * (m1[1][0] - S[1][i]))
             dist2 = math.sqrt((m2[0][0] - S[0][i]) * (m2[0][0] - S[0][i]) + (m2[1][0] - S[1][i]) * (m2[1][0] - S[1][i]))
-            dist1 = round(dist1, 4)
-            dist2 = round(dist2, 4)
             if (dist1 <= dist2):
                 class1.append([S[0][i], S[1][i]])
                 label = 1
@@ -39,12 +37,13 @@ def Kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1 = [[-1], [3]], m2 
 def Fuzzy_kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
                  mu = [[1, 0.5, 0.5, 0.5, 0.5, 0], [0, 0.5, 0.5, 0.5, 0.5, 1]],
                      b = 2, theta = 0.5):
-    iteration = 0
+    iteration = 1
     while (1):
         print("iteration:" + str(iteration))
         print("normalise memberships:")
         print(mu)
         print("")
+
         first_element = 0
         second_element = 0
         dinominator = 0
@@ -72,10 +71,9 @@ def Fuzzy_kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
         for i in range(len(S[0])):
             dist1 = math.sqrt((m1[0][0] - S[0][i]) * (m1[0][0] - S[0][i]) + (m1[1][0] - S[1][i]) * (m1[1][0] - S[1][i]))
             dist2 = math.sqrt((m2[0][0] - S[0][i]) * (m2[0][0] - S[0][i]) + (m2[1][0] - S[1][i]) * (m2[1][0] - S[1][i]))
-            dist1 = round(dist1, 4)
-            dist2 = round(dist2, 4)
-            u1j = round(round(1/(dist1 * dist1), 4)/(round(1/(dist1 * dist1), 4) + round(1/(dist2 * dist2), 4)), 4)
-            u2j = round(round(1 / (dist2 * dist2), 4) / (round(1 / (dist1 * dist1), 4) + round(1 / (dist2 * dist2), 4)), 4)
+
+            u1j = 1/(dist1 * dist1)/(1/(dist1 * dist1) + 1/(dist2 * dist2))
+            u2j = 1/(dist2 * dist2)/(1/(dist1 * dist1) + 1/(dist2 * dist2))
 
             print("[" + str(S[0][i]) + " " + str(S[1][i]) + "]" + "   " + str(dist1) + "         " + str(
                 dist2) + "    "+str(round(1/(dist1*dist1), 4))+"             "+str(round(1/(dist2*dist2), 4))+ "           "
@@ -87,12 +85,21 @@ def Fuzzy_kmeans(S = [[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
         new_mu = [new_mu1, new_mu2]
         print(new_mu)
 
-        if(判断m差值是不是小于theta):
-            # TO DO
-            # print m1 m2
-        else:
-            break
+        if(iteration > 1):
+            if (abs(m1[0][0] - m1_old[0][0]) < theta and abs(m1[1][0] - m1_old[1][0]) < theta and
+                    abs(m2[0][0] - m2_old[0][0]) < theta and abs(m2[1][0] - m2_old[1][0]) < theta):
+                print("final m1:")
+                print(m1)
+                print("final m2:")
+                print(m2)
+                break
+
+        mu = new_mu
+
+        m1_old = m1
+        m2_old = m2
+        iteration += 1
 
 if __name__ == '__main__':
-    #Kmeans()
-    Fuzzy_kmeans()
+    Kmeans()
+    #Fuzzy_kmeans()
