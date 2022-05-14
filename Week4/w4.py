@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from commons.utils import Heaviside
 
 
 def sigmoid(x):
@@ -19,7 +20,7 @@ def d_tanh_sigmoid(x):
     return 1 - math.pow(tanh_sigmoid(x), 2)
 
 
-def y(xp=[1, 1], c=[0, 0], sigma=(1/math.sqrt(2))):
+def RBF_y(xp=[1, 1], c=[0, 0], sigma=(1 / math.sqrt(2))):
     """
     y_i(x_p) = ...
     
@@ -31,7 +32,9 @@ def y(xp=[1, 1], c=[0, 0], sigma=(1/math.sqrt(2))):
     return np.exp(-xpc / (2 * math.pow(sigma, 2)))
 
 
-def RBF_y():
+def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
+        C=[[0, 0], [1, 1]],
+        t=[0, 1, 1, 0]):
     """
     给定c 和 sigma, 输入x, 计算y
     
@@ -43,10 +46,24 @@ def RBF_y():
         1. choose c and sigma (manually or randomly)
         2. determine weights at the output layer using training dataset and least squares method
     """
-    # TODO
-    pass
+    Y = []
+    for x in X:
+        y1 = RBF_y(x, C[0])
+        y2 = RBF_y(x, C[1])
+        print(f"x:{x},\t y1={y1}, \t y2={y2}")
+        Y.append([y1, y2, 1])
+
+    Y = np.array(Y)
+    w = np.dot((np.dot(np.linalg.inv(np.dot(Y.T,Y)),Y.T)),t)
+    w = np.around(w, 4)
+    print(f"weight after pseudo inverse:{w}")
+    for y in Y:
+        z = np.around(np.dot(w, y), 4)
+        c = Heaviside(z)
+        print(f"x:{x},\t y1={y1}, \t y2={y2}, \t z1= {z},\t class={c}")
+
 
 
 if __name__ == '__main__':
-    print(np.tanh(1.5))
-    print(tanh_sigmoid(1.5))
+    RBF()
+
