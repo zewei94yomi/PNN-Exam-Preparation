@@ -1,6 +1,7 @@
 import math
 import numpy as np
 from itertools import chain
+from commons.utils import distance
 
 
 def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5], [1]]):
@@ -39,9 +40,37 @@ def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5]
     print(m2)
 
 
-def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]]):
-    pass
-
+def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
+              centers=[[-1, 3], [5, 1]],
+              iterations=2):
+    for iteration in range(iterations):
+        print("--------------------------------------------")
+        print(f"iteration {iteration}" )
+        print(f"centers: {centers}")
+        cls = dict()
+        for i in range(len(S)):
+            dst = []    # distances for each data sample to all centers
+            for center in centers:
+                dst.append(distance(S[i], center))
+            belong = 1 + np.argmin(dst)
+            if belong not in cls:
+                cls[belong] = []
+            cls[belong].append(S[i])
+            # cls[i] = 1 + np.argmin(dst)
+            print(f"Sample: {S[i]}", end="")
+            for j in range(len(dst)):
+                print(f", \t d to {centers[j]}: {round(dst[j], 4)}", end="")
+            print(f", \t class {belong}")
+        # Update centers
+        for i in range(len(centers)):
+            ps = cls[i + 1]
+            new_list = np.mean(cls[i + 1], axis=0).tolist()
+            centers[i] = new_list
+        print(f"New center: {centers}")
+        
+            
+            
+        
 
 def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
                  mu=[[1, 0.5, 0.5, 0.5, 0.5, 0], [0, 0.5, 0.5, 0.5, 0.5, 1]],
@@ -112,5 +141,6 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
 
 
 if __name__ == '__main__':
-    Kmeans()
+    # Kmeans()
     # Fuzzy_kmeans()
+    Kmeans_v2()
