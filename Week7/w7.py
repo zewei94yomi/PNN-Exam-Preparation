@@ -120,10 +120,15 @@ def fisher_method_LDA(X=[[1, 2], [2, 1], [3, 3], [6, 5], [7, 8]],
         print(f"w{i+1}:\t sb:{sb}, \t sw:{sw}, Cost J(w):{costs[i]}")
 
 def extreme_learning_machine(X=[[1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]],
-                             V=[[-0.62, 0.44, -0.91], [-0.81, -0.09, 0.02], [0.74, -0.91, -0.60], [-0.82, -0.92, 0.71], [-0.26, 0.68, 0.15], [0.80, -0.94, -0.83]],
+                             V=[[-0.62, 0.44, -0.91],
+                                [-0.81, -0.09, 0.02],
+                                [0.74, -0.91, -0.60],
+                                [-0.82, -0.92, 0.71],
+                                [-0.26, 0.68, 0.15],
+                                [0.80, -0.94, -0.83]],
                              w=[0, 0, 0, -1, 0, 0, 2]):
     """
-    Tutorial 7.10
+    Tutorial 7.11
     Apply extreme learning machine to calculate the response of the output neuron.
     Y = H[VX] => Z = wY
     X: all data in Augmented Notion. (1, x1, x2)
@@ -170,7 +175,6 @@ if __name__ == '__main__':
     # KLT to project n-dimensional data onto the first two principal components
     # KLT(X=[[5, 5, 4.4, 3.2], [6.2, 7.0, 6.3, 5.7], [5.5, 5.0, 5.2, 3.2], [3.1, 6.3, 4.0, 2.5], [6.2, 5.6, 2.3, 6.1]],
     #     V=[[0.58, 0.12, -0.04, 0.81],[0.11, 0.25, 0.96, -0.07]])
-    KLT()
 
     # Apply to Tutorial 7.6
     # KLT(X=[[0, 1], [3, 5], [5, 4], [5, 6], [8, 7], [9, 7]],
@@ -186,4 +190,4 @@ if __name__ == '__main__':
 
     # extreme_learning_machine()
 
-    # sparse_coding()
+    sparse_coding()

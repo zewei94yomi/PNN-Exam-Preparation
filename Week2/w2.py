@@ -221,4 +221,4 @@ if __name__ == '__main__':
     # sequential_widrow_hoff_epoch()
     
     # KNN
-    # knn()
+    knn()
