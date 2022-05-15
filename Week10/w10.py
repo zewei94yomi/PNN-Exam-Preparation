@@ -178,6 +178,46 @@ def competitive_learning(C=[[-0.5, 1.5], [0, 2.5], [1.5, 0]],
         table.add_row(table_rows)
     print(table)
 
+def leader_follower_clustering(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
+                            chosen_id=[3, 1, 1, 5, 6],
+                            theta = 3,
+                            lr = 0.5):
+    # Initialize Table
+    table = PrettyTable()
+    columns_name = ["Iteration", "X", "clustering centers", "||x-m_j||", "j", "||x-m_j||<theta", "update"]
+    table.field_names = columns_name
+
+    ite = 0
+    cluster_centers = []
+    for id in chosen_id:
+        table_rows = []
+        ite += 1
+        table_rows.append(str(ite))
+        x = S[id-1]
+        table_rows.append(str(x))
+        if(ite == 1):
+            cluster_centers.append(x)
+        x = np.array(x)
+        table_rows.append(str(cluster_centers))
+        distances = []
+        for i in range(len(cluster_centers)):
+            dist = np.around(distance(x1=x, x2=cluster_centers[i]), 4)
+            distances.append(dist)
+        table_rows.append(distances)
+        selected_j = np.argmin(distances)
+        table_rows.append(str(selected_j + 1))
+
+        if(min(distances) < theta):
+            table_rows.append("yes")
+            cluster_centers[selected_j] += lr * (x - cluster_centers[selected_j])
+        else:
+            table_rows.append("no")
+            cluster_centers.append(S[id-1])
+
+        table_rows.append(str(cluster_centers))
+        table.add_row(table_rows)
+    print(table)
+
 
 def Agglomerative(X=[[-1, 3], [1, 2], [0, 1], [4, 0], [5, 4], [3, 2]],
                   affinity='euclidean',
@@ -201,4 +241,5 @@ if __name__ == '__main__':
     # Kmeans_v2()
     #kmeans_sklearn()
     # competitive_learning()
-    Agglomerative()
+    leader_follower_clustering()
+    #Agglomerative()
