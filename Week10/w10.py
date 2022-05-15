@@ -145,7 +145,7 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
         iteration += 1
 
 def competitive_learning(C=[[-0.5, 1.5], [0, 2.5], [1.5, 0]],
-                         S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
+                         S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
                          chosen_id=[3, 1, 1, 5, 6],
                          lr=0.1):
     # Initialize Table
@@ -164,9 +164,7 @@ def competitive_learning(C=[[-0.5, 1.5], [0, 2.5], [1.5, 0]],
         table_rows = []
         ite += 1
         table_rows.append(str(ite))
-        x = []
-        x.append(S[0][id-1])
-        x.append(S[1][id-1])
+        x = S[id-1]
         table_rows.append(str(x))
         x = np.array(x)
         for i in range(len(C)):
