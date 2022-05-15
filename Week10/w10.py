@@ -4,6 +4,7 @@ from itertools import chain
 from commons.utils import distance
 from sklearn.cluster import KMeans
 from prettytable import PrettyTable
+from sklearn.cluster import AgglomerativeClustering
 
 
 def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5], [1]]):
@@ -178,9 +179,26 @@ def competitive_learning(C=[[-0.5, 1.5], [0, 2.5], [1.5, 0]],
     print(table)
 
 
+def Agglomerative(X=[[-1, 3], [1, 2], [0, 1], [4, 0], [5, 4], [3, 2]],
+                  affinity='euclidean',
+                  linkage='single'):
+    table = PrettyTable()
+    columns_name = ["Iteration"]
+    for i in range(len(X)):
+        columns_name.append(f"{X[i]}")
+    table.field_names = columns_name
+    for i in range(len(X), 0, -1):
+        table_rows = [str(len(X) - i)]
+        clustering = AgglomerativeClustering(n_clusters=i, affinity=affinity, linkage=linkage).fit(X)
+        table_rows += clustering.labels_.tolist()
+        table.add_row(table_rows)
+    print(table)
+    
+    
 if __name__ == '__main__':
     # Kmeans()
     # Fuzzy_kmeans()
     # Kmeans_v2()
     #kmeans_sklearn()
-    competitive_learning()
+    # competitive_learning()
+    Agglomerative()

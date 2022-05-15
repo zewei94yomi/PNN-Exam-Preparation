@@ -15,7 +15,7 @@ def KLT(X=[[1, 2, 1], [2, 3, 1], [3, 5, 1], [2, 2, 1]],
     """
     Tutorial 7.4
     Use KLT to project n-dimension data onto the first i principal components
-    X: all data points (X=[[x11, x12, x13], [x21, x22, x23],...])
+    X: all data points
     V: selected i largest eigenvectors.
     """
     mean = np.mean(X, axis=0)
@@ -173,7 +173,6 @@ def sparse_coding(x=[-0.05, -0.95],
 
 if __name__ == '__main__':
     # KLT to project n-dimensional data onto the first two principal components
-    # KLT()
     # KLT(X=[[5, 5, 4.4, 3.2], [6.2, 7.0, 6.3, 5.7], [5.5, 5.0, 5.2, 3.2], [3.1, 6.3, 4.0, 2.5], [6.2, 5.6, 2.3, 6.1]],
     #     V=[[0.58, 0.12, -0.04, 0.81],[0.11, 0.25, 0.96, -0.07]])
 
@@ -182,7 +181,6 @@ if __name__ == '__main__':
     #     V=[-0.8309, -0.5564])
 
     # Apply Oja's learning rule to find the first principal component.
-    # Ojas_learning_rule()
     # Ojas_learning_rule(X=[[-0.2, -0.78, -0.04, -0.94], [1, 1.22, 1.86, 1.56], [0.3, -0.78, 0.76, -0.94], [-2.1, 0.52, -0.44, -1.64], [1, -0.18, -2.14, 1.96]],
     #                    w=[-0.2, -0.2, 0.2, 0],
     #                    epoch=1,
@@ -192,7 +190,4 @@ if __name__ == '__main__':
 
     # extreme_learning_machine()
 
-    # sparse_coding(Yt=[[1, 0, 0, 0, 1, 0, 0, 0],
-    #                  [0, 0, 0, -1, 0, 0, 0, 0]])
-    KLT(X=[[4, 2, 2], [0, -2, 2], [2, 4, 2], [-2, 0, 2]],
-        V=[[-0.7071, -0.7071, 0]])
+    sparse_coding()

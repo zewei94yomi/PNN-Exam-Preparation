@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 
 def add_list(l1, l2):
@@ -41,7 +42,12 @@ def distance(x1=[6, 1], x2=[2, 4]):
     return math.sqrt(sqr)
 
 
+def clusterMean(X=[[1, 2], [2, 3], [12, 1]]):
+    return np.mean(X, axis=0).tolist()
+    
+
 if __name__ == '__main__':
     print("Test function here...")
-    dst = distance()
-    print(dst)
+    # dst = distance()
+    # print(dst)
+    print(clusterMean())
