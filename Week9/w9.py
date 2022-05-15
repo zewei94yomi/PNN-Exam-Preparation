@@ -8,7 +8,7 @@ def calculate_alpha(epsilon):
 def update_weights(initial_weight=0.25,
                    alpha=0.5493,
                    real_class=1,
-                   predict_class=-1):
+                   predict_class=1):
     update_weights = initial_weight * math.exp(-alpha * real_class * predict_class)
     return round(update_weights, 4)
 
@@ -16,5 +16,5 @@ def update_weights(initial_weight=0.25,
 # 要再经过regularisation才能最后更新权重
 # 即得到的return值再除以总的weight
 if __name__ == '__main__':
-    print(calculate_alpha(0.3))
-    print(update_weights())
+    print(calculate_alpha(0.1666))
+    print(update_weights(alpha=0.805, initial_weight=0.5001))

@@ -105,22 +105,22 @@ if __name__ == '__main__':
     # heaviside()
     
     # Batch normalization
-    # batch_normalization()
+    batch_normalization()
     
     # Average Pooling with kernel size and stride
     # avg_pooling()
     
     # Calculate output dimensions
     # calculate_outputdim()
-    calculate_outputdim(input=[200, 200],
-                        mask=[5, 5],
-                        padding=0,
-                        stride=1)
-    calculate_outputdim(input=[196, 196],
-                        mask=[2, 2],
-                        padding=0,
-                        stride=2)
-    calculate_outputdim(input=[98, 98],
-                        mask=[4, 4],
-                        padding=1,
-                        stride=2)
+    # calculate_outputdim(input=[200, 200],
+    #                     mask=[5, 5],
+    #                     padding=0,
+    #                     stride=1)
+    # calculate_outputdim(input=[196, 196],
+    #                     mask=[2, 2],
+    #                     padding=0,
+    #                     stride=2)
+    # calculate_outputdim(input=[98, 98],
+    #                     mask=[4, 4],
+    #                     padding=1,
+    #                     stride=2)

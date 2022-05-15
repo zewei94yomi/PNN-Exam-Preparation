@@ -3,6 +3,7 @@ import numpy as np
 from itertools import chain
 from commons.utils import distance
 from sklearn.cluster import KMeans
+from prettytable import PrettyTable
 
 
 def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5], [1]]):
@@ -143,9 +144,45 @@ def Fuzzy_kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
         m2_old = m2
         iteration += 1
 
+def competitive_learning(C=[[-0.5, 1.5], [0, 2.5], [1.5, 0]],
+                         S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]],
+                         chosen_id=[3, 1, 1, 5, 6],
+                         lr=0.1):
+    # Initialize Table
+    table = PrettyTable()
+    columns_name = ["Iteration", "X"]
+    for i in range(len(C)):
+        columns_name.append(f"||x-m{i+1}||")
+    columns_name.append("j")
+    columns_name.append("mj<-mj+lr*(x-mj)")
+    table.field_names = columns_name
+
+    distances = np.array([0]*len(C), dtype=np.float)
+    C = np.array(C)
+    ite = 0
+    for id in chosen_id:
+        table_rows = []
+        ite += 1
+        table_rows.append(str(ite))
+        x = []
+        x.append(S[0][id-1])
+        x.append(S[1][id-1])
+        table_rows.append(str(x))
+        x = np.array(x)
+        for i in range(len(C)):
+            distances[i] = np.around(distance(x1=x, x2=C[i]), 4)
+            table_rows.append(str(distances[i]))
+        selected_j = np.argmin(distances)
+        table_rows.append(str(selected_j+1))
+        C[selected_j] += lr * (x - C[selected_j])
+        table_rows.append(str(C[selected_j]))
+        table.add_row(table_rows)
+    print(table)
+
 
 if __name__ == '__main__':
     # Kmeans()
-    Fuzzy_kmeans()
+    # Fuzzy_kmeans()
     # Kmeans_v2()
     #kmeans_sklearn()
+    competitive_learning()
