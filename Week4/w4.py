@@ -34,7 +34,8 @@ def RBF_y(xp=[1, 1], c=[0, 0], sigma=(1 / math.sqrt(2))):
 
 def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
         C=[[0, 0], [1, 1]],
-        t=[0, 1, 1, 0]):
+        t=[0, 1, 1, 0],
+        sigma=(1 / math.sqrt(2))):
     """
     给定c 和 sigma, 输入x, 计算y
     
@@ -48,8 +49,8 @@ def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
     """
     Y = []
     for x in X:
-        y1 = RBF_y(x, C[0])
-        y2 = RBF_y(x, C[1])
+        y1 = RBF_y(x, C[0], sigma)
+        y2 = RBF_y(x, C[1], sigma)
         print(f"x:{x},\t y1={y1}, \t y2={y2}")
         Y.append([y1, y2, 1])
 
@@ -65,5 +66,8 @@ def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
 
 
 if __name__ == '__main__':
-    RBF()
+    RBF(X=[[-1, -1], [-1, 1], [1, 0], [1, 1]],
+        C=[[-1, -1], [1, 1]],
+        t=[-1, 1, 1, -1],
+        sigma=math.sqrt(2))
 
