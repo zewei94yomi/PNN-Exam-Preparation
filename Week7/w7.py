@@ -148,7 +148,8 @@ def sparse_coding(x=[-0.05, -0.95],
                   Yt=[[1, 0, 0, 0, 1, 0, 0, 0],
                      [0, 0, 1, 0, 0, 0, -1, 0]],
                   Vt=[[0.4, 0.55, 0.5, -0.1, -0.5, 0.9, 0.5, 0.45],
-                      [-0.6, -0.45, -0.5, 0.9, -0.5, 0.1, 0.5, 0.55]]):
+                      [-0.6, -0.45, -0.5, 0.9, -0.5, 0.1, 0.5, 0.55]],
+                  lamb=1):
     """
     Tutorial 7.12
     Calculate the best sparse code for signal x
@@ -160,15 +161,18 @@ def sparse_coding(x=[-0.05, -0.95],
     """
 
     errors = []
+    costs = []
     cnt = 0
     for y in Yt:
+        l0norm = len(np.nonzero(y)[0])
         cnt += 1
         tmp = np.dot(Vt, np.array(y).T)
         res = x-tmp
         normval = round(np.linalg.norm(res), 3)
+        cost = normval+lamb*l0norm
         errors.append(normval)
-
-        print(f"Vt*y_{cnt}:{tmp}, \t x-Vt*y_{cnt}:{res}, \t error of y_{cnt}: {normval}")
+        costs.append(cost)
+        print(f"y{cnt}:{y}, \t Vt*y_{cnt}:{tmp}, \t x-Vt*y_{cnt}:{res}, \t error of y_{cnt}: {normval}, \t costs: {cost}")
 
 
 if __name__ == '__main__':
@@ -190,4 +194,6 @@ if __name__ == '__main__':
 
     # extreme_learning_machine()
 
-    sparse_coding()
+    sparse_coding(x=[2, 3],
+                  Yt=[[1, 2, 0, -1], [0, 0.5, 1, 0]],
+                  Vt=[[1, 1, 2, 1], [-4, 3, 2, -1]])
