@@ -1,6 +1,6 @@
 import math
 import numpy as np
-from commons.utils import Heaviside
+from commons.utils import Heaviside, sigma_max
 
 
 def sigmoid(x):
@@ -34,8 +34,7 @@ def RBF_y(xp=[1, 1], c=[0, 0], sigma=(1 / math.sqrt(2))):
 
 def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
         C=[[0, 0], [1, 1]],
-        t=[0, 1, 1, 0],
-        sigma=(1 / math.sqrt(2))):
+        t=[0, 1, 1, 0]):
     """
     给定c 和 sigma, 输入x, 计算y
     
@@ -47,6 +46,7 @@ def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
         1. choose c and sigma (manually or randomly)
         2. determine weights at the output layer using training dataset and least squares method
     """
+    sigma = sigma_max(C=C)
     Y = []
     for x in X:
         y1 = RBF_y(x, C[0], sigma)
@@ -66,8 +66,8 @@ def RBF(X=[[0, 0], [0, 1], [1, 0], [1, 1]],
 
 
 if __name__ == '__main__':
-    RBF(X=[[-1, -1], [-1, 1], [1, 0], [1, 1]],
-        C=[[-1, -1], [1, 1]],
-        t=[-1, 1, 1, -1],
-        sigma=math.sqrt(2))
+    # RBF(X=[[-1, -1], [-1, 1], [1, 0], [1, 1]],
+    #     C=[[-1, -1], [1, 1]],
+    #     t=[-1, 1, 1, -1])
+    RBF()
 

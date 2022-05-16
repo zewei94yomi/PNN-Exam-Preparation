@@ -44,10 +44,16 @@ def distance(x1=[6, 1], x2=[2, 4]):
 
 def clusterMean(X=[[1, 2], [2, 3], [12, 1]]):
     return np.mean(X, axis=0).tolist()
+
+
+def sigma_max(C=[[0, 0], [1, 1]]):
+    return math.sqrt((math.pow(C[0][0] - C[1][0], 2) + math.pow(C[0][1] - C[1][1], 2)) / 4)
+
     
 
 if __name__ == '__main__':
     print("Test function here...")
     # dst = distance()
     # print(dst)
-    print(clusterMean())
+    # print(clusterMean())
+    print(sigma_max())
