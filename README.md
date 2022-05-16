@@ -24,10 +24,14 @@ You shall change parameters in the method definition.
 
 ## Week2: Discriminant Functions
 
-- Q1: Dichotomizer
-- Q2, Q5: Dichotomizer (augmented vectors)
-- Q4: 2D Quadratic Discrimination
+- Q1: Dichotomizer: g(x) = w^t * x + w_0
+- Q2, Q5: Dichotomizer (augmented vectors): g(x) = a^t * y
+- Q4: 2D Quadratic Discrimination: g(x) = xt * A * x + xt * b + c
 - Q6, Q7, Q9, Q10: Perceptron Learning
+    - Q6: Batch Perceptron Learning
+    - Q7: Sequential Perceptron Learning
+    - Q9: Sequential Perceptron Learning
+    - Q10: Sequential Perceptron Learning
     - Input data: Augmented Notion + Sample Normalization
     - Choose 'Sequential' or 'Batch' learning
 - Q11: Multiclass Sequential Perceptron Learning
@@ -51,3 +55,19 @@ You shall change parameters in the method definition.
 - Q4: ReLU, LReLU, tanh, heaviside
 - Q5: Batch Normalization
 - Q9: Calculate output dimensions
+
+
+## Week6: Deep Generative Neural Networks
+
+- Q1, Q2, Q3: VDG
+
+## Week7: Feature Extraction
+
+
+## Week8: Support Vector Machines
+
+
+## Week9: Ensemble Methods
+
+
+## Week10: Clustering
