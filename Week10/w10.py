@@ -43,8 +43,8 @@ def Kmeans(S=[[-1, 1, 0, 4, 3, 5], [3, 4, 5, -1, 0, 1]], m1=[[-1], [3]], m2=[[5]
     print(m2)
 
 
-def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
-              centers=[[-1, 3], [5, 1]],
+def Kmeans_v2(S=[[3, 7], [0, 10], [10, 4], [9, 9], [6, 0], [0, 3]],
+              centers=[[0, 10], [9, 9]],
               iterations=2):
     for iteration in range(iterations):
         print("--------------------------------------------")
@@ -55,7 +55,11 @@ def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
             dst = []    # distances for each data sample to all centers
             for center in centers:
                 dst.append(distance(S[i], center))
-            belong = 1 + np.argmin(dst)
+            if dst[0] < dst[1]:
+                belong = 1
+            elif dst[0] >= dst[1]:
+                belong = 2
+            # belong = 1 + np.argmin(dst)
             if belong not in cls:
                 cls[belong] = []
             cls[belong].append(S[i])
@@ -71,7 +75,7 @@ def Kmeans_v2(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
         print(f"New center: {centers}")
         
         
-def kmeans_sklearn(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 1]],
+def kmeans_sklearn(S=[[3, 7], [0, 10], [10, 4], [9, 9], [6, 0], [0, 3]],
                    n_clusters=2):
     kmeans = KMeans(n_clusters=n_clusters).fit(S)
     print("Centers: (converged)")
@@ -219,7 +223,7 @@ def leader_follower_clustering(S=[[-1, 3], [1, 4], [0, 5], [4, -1], [3, 0], [5, 
     print(table)
 
 
-def Agglomerative(X=[[-1, 3], [1, 2], [0, 1], [4, 0], [5, 4], [3, 2]],
+def Agglomerative(X=[[1, 0], [0, 2], [1, 3], [3, 0], [3, 1]],
                   affinity='euclidean',
                   linkage='single'):
     table = PrettyTable()
@@ -239,7 +243,7 @@ if __name__ == '__main__':
     # Kmeans()
     # Fuzzy_kmeans()
     # Kmeans_v2()
-    #kmeans_sklearn()
+    kmeans_sklearn()
     # competitive_learning()
-    leader_follower_clustering()
-    #Agglomerative()
+    # leader_follower_clustering()
+    # Agglomerative()

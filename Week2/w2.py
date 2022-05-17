@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 def dichotomizer(W=[2, 1],
                  w0=-5,
-                 x=[3, 3]):
+                 x=[1, 1]):
     """
     Tutorial 2.1
     g(x) = w^t * x + w_0
@@ -20,8 +20,8 @@ def dichotomizer(W=[2, 1],
     return gx
 
 
-def dichotomizer_augmented_vectors(at=[-3, 1, 2, 2, 2, 4],
-                                   x=[1, 1, 1, 1, 1, 1],
+def dichotomizer_augmented_vectors(at=[-2, 1, 2, 1, 2],
+                                   x=[1, 1, 1, 1, 1],
                                    print_res=True):
     """
     Tutorial 2.2, 2.5
@@ -39,8 +39,8 @@ def dichotomizer_augmented_vectors(at=[-3, 1, 2, 2, 2, 4],
     return gx
 
 
-def two_d_quadratic_discrimination(x=[[1], [1]],
-                                   A=[[-2, 5], [5, -8]],
+def two_d_quadratic_discrimination(x=[[0], [-1]],
+                                   A=[[2, 1], [1, 4]],
                                    b=[[1], [2]], c=-3):
     """
     Tutorial 2.4
@@ -54,8 +54,8 @@ def two_d_quadratic_discrimination(x=[[1], [1]],
     return gx
 
 
-def perceptron_augmented_notion(at=[1, 0, 0],
-                                Y=[[1, 0, 2], [1, 1, 2], [1, 2, 1], [-1, 3, -1], [-1, 2, 1], [-1, 3, 2]],
+def perceptron_augmented_notion(at=[-25, 5, 2],
+                                Y=[[1, 5, 1], [1, 5, -1], [1, 7, 0], [-1, -3, 0], [-1, -2, -1], [-1, -1, 1]],
                                 lr=1,
                                 learn_type="Sequential"):
     """
@@ -81,15 +81,12 @@ def perceptron_augmented_notion(at=[1, 0, 0],
             if gx <= 0:
                 has_mismatch = True
                 if learn_type == "Batch":
-                    # add_list(total_change, lr * y)
                     total_change = np.add(total_change, lr * y)
                 else:
-                    # add_list(at, lr * y)
                     at = np.add(at, lr * y)
             if learn_type == "Sequential":
                 print(f"Iteration {iteration}, \t y^t = {y}, \t g(x) = {gx}, \t at = {at}")
         if learn_type == "Batch":
-            # add_list(at, total_change)
             at = np.add(at, total_change)
             print(f"Epoch {epoch}, \t sum of delta = {total_change}, \t at = {at}")
     print(f"Converged: at = {at}")
@@ -97,9 +94,9 @@ def perceptron_augmented_notion(at=[1, 0, 0],
 
 
 def multiclass_sequential_perceptron_augmented_notion(
-        Yt=[[1, 1, 1], [1, 2, 0], [1, 0, 2], [1, -1, 1], [1, -1, -1]],
+        Yt=[[1, 0, 1], [1, 1, 0], [1, 0.5, 1.5], [1, 1, 1], [1, -0.5, 0]],
         w=[1, 1, 2, 2, 3],
-        At=[[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        At=[[-0.5, 2.0, 1.5], [-3, 0.5, 1.0], [0.5, 0.5, 1.5]],
         lr=1):
     """
     Tutorial 2.11
@@ -214,11 +211,11 @@ if __name__ == '__main__':
     # perceptron_augmented_notion()
     
     # Multiclass sequential perceptron learning
-    #multiclass_sequential_perceptron_augmented_notion()
+    multiclass_sequential_perceptron_augmented_notion()
     
     # Sequential Widrow-Hoff
-    sequential_widrow_hoff_iter()
+    # sequential_widrow_hoff_iter()
     # sequential_widrow_hoff_epoch()
     
     # KNN
-    knn()
+    # knn()

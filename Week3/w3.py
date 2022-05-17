@@ -18,23 +18,23 @@ def neuron_Heaviside(w=[0.1, -0.5, 0.4],
     print(f"y = H(wx - theta) = {y}")
 
 
-def delta_learning(theta=1.5,
-                   w=[2],
+def delta_learning(theta=-2,
+                   w=[0.5, 1],
                    lr=1,
-                   X=[[1, 0], [1, 1]],
-                   t=[1, 0],
-                   learn_type="Batch"):
+                   X=[[1, 0, 2], [1, 2, 1], [1, -3, 1], [1, -2, -1], [1, 0, -1]],
+                   t=[1, 1, 0, 0, 0],
+                   learn_type="Sequential"):
     """
     Tutorial 3.3('OR': Sequential), 3.4('OR': Batch),
              3.5('AND': Sequential), 3.6(2d data: Sequential)
     It doesn't matter which type of operation is being learning,
     the only important things are input `X` and target `y`.
     
-    Delta learning:
+    Sequential learning:
         w = w + lr * (t - y) * xt
             where t is the class (i.e. y)
     
-    Sequential learning:
+    Batch learning:
         w = w + sum(lr * (t - y)) * xt
             where t is the class (i.e. y), and sum is the sum of all delta in a batch
     """
@@ -75,11 +75,12 @@ def delta_learning(theta=1.5,
                   f"\t update = {total_delta}, \t W = {W}")
     print(f"Converged: W = {W}, theta = {-W[0]}, w = {W[1:]}")
 
+
 def negative_feedback_network(X=[1, 1, 0],
                               W=[[1, 1, 0], [1, 1, 1]],
                               alpha=0.25,
                               y=[0, 0],
-                              ite=5):
+                              ite=4):
     for i in range(ite):
         W = np.array(W)
         e = X-np.dot(W.T, y)
@@ -89,6 +90,7 @@ def negative_feedback_network(X=[1, 1, 0],
         print(f"Iteration{i+1}, \t e = {e}, \t We = {We}, \t y = {y}, \t WY = {WY}")
     print(f"final output:{y}")
 
+
 if __name__ == '__main__':
     # print("Tutorial 3.2")
     # neuron_Heaviside()
@@ -96,6 +98,7 @@ if __name__ == '__main__':
 
     # print("Tutorial 3.3(Sequential), 3.4(Batch), 3.5(Sequential), 3.6(Sequential)")
     # delta_learning(theta=-1, w=[0, 0], lr=1, X=[[1, 0, 2], [1, 1, 2], [1, 2, 1], [1, -3, 1], [1, -2, -1], [1, -3, -2]], t=[1, 1, 1, 0, 0, 0],learn_type='Sequential')
+    delta_learning()
 
-    negative_feedback_network(alpha=0.5)
+    # negative_feedback_network()
 

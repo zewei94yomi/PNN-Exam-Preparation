@@ -14,7 +14,7 @@ def update_weights(initial_weight=0.25,
     return round(update_weights, 4)
 
 
-def entropy_impurity(w1=6, w2=8):
+def entropy_impurity(w1=6, w2=2):
     if w1 == 0 or w2 == 0:
         print(f"entropy impurity i(n) = 0")
         return 0
@@ -24,7 +24,7 @@ def entropy_impurity(w1=6, w2=8):
         return i
 
 
-def delta_entropy_impurity(root=[6, 8], left=[6, 0], right=[2, 6]):
+def delta_entropy_impurity(root=[6, 8], left=[6, 2], right=[0, 6]):
     res = entropy_impurity(w1=root[0], w2=root[1]) - \
           (root[0] / (root[0] + root[1])) * entropy_impurity(w1=left[0], w2=left[1]) - \
           (root[1] / (root[0] + root[1])) * entropy_impurity(w1=right[0], w2=right[1])
@@ -37,5 +37,5 @@ def delta_entropy_impurity(root=[6, 8], left=[6, 0], right=[2, 6]):
 if __name__ == '__main__':
     # print(calculate_alpha(0.1666))
     # print(update_weights(alpha=0.805, initial_weight=0.5001))
-    # entropy_impurity()
+    entropy_impurity()
     delta_entropy_impurity()

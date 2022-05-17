@@ -48,7 +48,7 @@ def KLT(X=[[1, 2, 1], [2, 3, 1], [3, 5, 1], [2, 2, 1]],
     print(C2)
     
 
-def Ojas_learning_rule(X=[[-5, -4], [-2, 0], [0, -1], [0, 1], [3, 2], [4, 2]],
+def Ojas_learning_rule(X=[[-4.6, -3], [-2.6, 0], [-0.6, -1], [2.4, 2], [5.4, 2]],
                        lr=0.01,
                        learn_type="Batch",
                        w=[-1, 0],
@@ -118,6 +118,7 @@ def fisher_method_LDA(X=[[1, 2], [2, 1], [3, 3], [6, 5], [7, 8]],
             sw += np.dot(w[i], (ele-mean2).T) ** 2
         costs.append(round(sb/sw, 4))
         print(f"w{i+1}:\t sb:{sb}, \t sw:{sw}, Cost J(w):{costs[i]}")
+
 
 def extreme_learning_machine(X=[[1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]],
                              V=[[-0.62, 0.44, -0.91],
@@ -189,11 +190,12 @@ if __name__ == '__main__':
     #                    w=[-0.2, -0.2, 0.2, 0],
     #                    epoch=1,
     #                    learn_type='Sequential')
+    Ojas_learning_rule()
 
     # fisher_method_LDA()
 
     # extreme_learning_machine()
 
-    sparse_coding(x=[2, 3],
-                  Yt=[[1, 2, 0, -1], [0, 0.5, 1, 0]],
-                  Vt=[[1, 1, 2, 1], [-4, 3, 2, -1]])
+    # sparse_coding(x=[2, 3],
+    #               Yt=[[1, 2, 0, -1], [0, 0.5, 1, 0]],
+    #               Vt=[[1, 1, 2, 1], [-4, 3, 2, -1]])
